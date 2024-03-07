@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "ShippingDetailsPage";
+}
+
+@model WebApplicationMVC.Models.UserModel
+
+@section Alerts
+{
+    @{
+        Html.RenderPartial("MsgsPartial");
+    }
+}
+
+@using (Html.BeginForm("ConfirmPayment", "Home", FormMethod.Post))
+
+{
+
+    <form>
+        <div class="container">
+            <h1>Shipping</h1>
+            <p>Please enter your shipping details.</p>
+            <hr />
+            <div class="form">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="firstname">First name</label>
+                            <input class="form-control" name="CsName" type="text" id="firstname" value=""  required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="lastname">Last name</label>
+                            <input class="form-control" name="CsLast" type="text" id="lastname" value=""  required/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="address">Address Line 1</label>
+                            <input class="form-control" name="AddressLine1" type="text" id="address"  required/>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="address">Address Line 2</label>
+                            <input class="form-control" name="AddressLine2" type="text" id="address">
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="city">City</label>
+                            <input class="form-control" name="City" type="text" id="city"  required/>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="zipcode">Email</label>
+                            <input class="form-control" name="Email" type="text" id="zipcode"  required/>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="city">Contact</label>
+                            <input class="form-control" name="Contact" type="text" id="city"  required/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <div class="row">
+                <div class="col-xs-4">
+                    <img src="@Model.item.ImgUrl" class="img-responsive" alt="Product Image" width="200">
+                </div>
+                <div class="col-xs-8">
+                    <h4>Product Name</h4>
+                    <p>@Model.item.Name.</p>
+                    <p>Price: LKR @Model.item.Price</p>
+                    <div class="input-group">
+                        <span class="input-group-btn">
+
+                        </span>
+                        <p>Quantyty: @Model.Quantity</p>
+
+                    </div>
+                    <p>Rs: @Model.TotalPrice</p>
+                </div>
+            </div>
+
+
+            <hr>
+            <input type="hidden" name="Preorder" value="@Model.Preorder.ToString()" />
+
+            <input type="hidden" name="ItemID" value="@Model.item.ID">
+            <input type="hidden" name="SuppID" value="@Model.item.SupID">
+            <input type="hidden" name="productName" value="@Model.item.Name">
+            <input type="hidden" name="productPrice" value="@Model.item.Price">
+            <input type="hidden" name="quantity" value="@Model.Quantity">
+            <input type="hidden" name="ItemCount" value="@Model.Quantity">
+            <input type="hidden" name="totalPrice" value="@Model.TotalPrice">
+
+
+            <input type="submit" class="btn btn-primary" value="Confirm">
+
+
+        </div>
+    </form>
+
+}
+
+
+
+
+

@@ -1,0 +1,31 @@
+﻿@model WebApplicationMVC.Models.UserModel
+
+
+@{
+    foreach (var c in Model.itemList) 
+    {
+        <div class="col-sm-4">
+            <div class="panel panel-default">
+                <a href="~/Home/ItemDetailView/@c.ID" style="text-decoration: none; color:Black;">
+                    <div class="panel-heading">
+                        <input type="hidden" name="ID" value="@c.ID" />
+                        <h3 class="panel-title" style="font-weight:500">@c.Name</h3>
+                    </div>
+                    <div class="panel-body">
+                        <img src="@c.ImgUrl" class="img-responsive" alt="Card image cap">
+                        <p>@c.Discription.</p>
+                        <p>Size @c.Size</p>
+
+                        <div class="btnclas">
+                            <input type="button" class="btn btn-warning " value="Buy" />
+                        </div>
+
+                    </div>
+                </a>
+            </div>
+        </div> 
+    }
+}
+
+
+

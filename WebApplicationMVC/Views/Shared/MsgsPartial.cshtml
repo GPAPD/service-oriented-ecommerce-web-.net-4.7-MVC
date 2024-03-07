@@ -1,0 +1,19 @@
+﻿@if (Model.Msgs.Count > 0)
+{
+    foreach (string msg in Model.Msgs)
+    {
+        <script type="text/javascript">
+            toastr.success('@msg', 'Message', opts);
+        </script>
+    }
+}
+@if (Model.Errors.Count > 0)
+{
+    foreach (string error in Model.Errors)
+    {
+        <script type="text/javascript">
+             toastr.error('@error', 'Error', opts);
+        </script>
+    }
+}
+

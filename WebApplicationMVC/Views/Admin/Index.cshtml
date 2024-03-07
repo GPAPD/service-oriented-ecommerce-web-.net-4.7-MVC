@@ -1,0 +1,97 @@
+﻿@model WebApplicationMVC.Models.UserModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Alerts
+{
+    @{
+        Html.RenderPartial("MsgsPartial");
+    }
+}
+
+@{
+    Html.RenderPartial("_AdminSideNavPartial");
+
+}
+
+@section Script
+{
+
+    <script>
+        function validation() {
+            var pass = $('#password').val();
+            var cpass = $('#confirm-password').val();
+
+            if ((pass != cpass) && (pass != null) && (cpass != null)) {
+                toastr.error('Password And Confirem Passwords Are Not Matching', 'Error', opts);
+            }
+            else {
+                $('#submit-btn').attr('type', 'submit');
+            }
+
+        }
+
+    </script>
+
+
+}
+
+
+@{
+    if (Model.UserLevel == 1)
+    {
+        <div>
+            @using (Html.BeginForm("CreatUserAccounts", "Admin", FormMethod.Post))
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <h2>Sign Up</h2>
+                            <form action="#">
+                                <div class="form-group">
+                                    <!--<label for="name">Name</label>-->
+                                    <input type="text" class="form-control" name="FirstName" id="name" placeholder="Name" required>
+                                </div>
+                                <div class="form-group">
+                                    <!--<label for="name">Name</label>-->
+                                    <input type="text" class="form-control" name="LastName" id="name" placeholder="Last name" required>
+                                </div>
+                                <div class="form-group">
+                                    <!--<label for="email">Email</label>-->
+                                    <input type="email" class="form-control" name="Email" id="email" placeholder="Email" required>
+                                </div>
+                                <label for="user-level">User Level</label>
+                                <div class="form-group">
+                                    <select name="UserLevel" id="user-level">
+                                        <option value=1>Staff</option>
+                                        <option value=1>Outlet Owners</option>
+                                        <option value=2>OutSide Seller</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <!--<label for="password">Password</label>-->
+                                    <input type="password" class="form-control" name="Password" id="password" placeholder="Password" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <!--<label for="confirm-password">Confirm Password</label>-->
+                                    <input type="password" class="form-control" name="" id="confirm-password" placeholder="Confirm password" required>
+                                </div>
+                                <input type="button" class="btn btn-primary" value="Create New Account" id="submit-btn" onclick="validation()">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    }
+
+}
+
+
+
+

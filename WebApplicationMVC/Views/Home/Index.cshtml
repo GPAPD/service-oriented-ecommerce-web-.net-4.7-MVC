@@ -1,0 +1,165 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@model WebApplicationMVC.Models.UserModel
+
+
+@section Alerts
+{
+    @{
+        Html.RenderPartial("MsgsPartial");
+    }
+
+
+    @*<script>
+
+
+            function addSortingToFilter() {
+                var selected = document.getElementById('ss-sort');
+                if (selected.value == 0) {
+                    filter.Sorting.field = 'sortorder_final';
+                    filter.Sorting.direction = 'desc';
+                    filter.Sorting.label = 'Most Popular';
+                } else if (selected.value == 1) {
+                    filter.Sorting.field = 'effective_price';
+                    filter.Sorting.direction = 'asc';
+                    filter.Sorting.label = 'Price: Low to High';
+                } else if (selected.value == 2) {
+                    filter.Sorting.field = 'effective_price';
+                    filter.Sorting.direction = 'desc';
+                    filter.Sorting.label = 'Price: High to Low';
+                } else if (selected.value == 3) {
+                    filter.Sorting.field = 'id_as_int';
+                    filter.Sorting.direction = 'desc';
+                    filter.Sorting.label = 'Newest Items';
+                } else if (selected.value == 4) {
+                    filter.Sorting.field = 'short_desc';
+                    filter.Sorting.direction = 'asc';
+                    filter.Sorting.label = 'Name (A - Z)';
+                } else if (selected.value == 5) {
+                    filter.Sorting.field = 'short_desc';
+                    filter.Sorting.direction = 'desc';
+                    filter.Sorting.label = 'Name (Z - A)';
+                }
+                fetchData();
+            }
+        </script>*@
+
+    @*<script>
+            function swapLayoutDesktop(element, orientation) {
+                if (orientation == 'list') {
+                    $("#listViewDesktop").addClass("highlight");
+                    $("#gridViewDesktop").removeClass("highlight");
+                    $("#ssItems").addClass("list");
+                    $("#ssItems").removeClass("grid");
+
+                } else if (orientation == 'grid') {
+                    $("#gridViewDesktop").addClass("highlight");
+                    $("#listViewDesktop").removeClass("highlight");
+                    $("#ssItems").addClass("grid");
+                    $("#ssItems").removeClass("list");
+                }
+                matchHeight();
+                matchHeight()
+            }
+
+            function swapLayout(element, orientation) {
+                if (orientation == 'list') {
+                    $("#listView").addClass("highlight");
+                    $("#gridView").removeClass("highlight");
+                    $("#ssItems").addClass("list");
+                    $("#ssItems").removeClass("grid");
+
+                } else if (orientation == 'grid') {
+                    $("#gridView").addClass("highlight");
+                    $("#listView").removeClass("highlight");
+                    $("#ssItems").addClass("grid");
+                    $("#ssItems").removeClass("list");
+                }
+                matchHeight();
+                matchHeight()
+            }
+
+            function matchHeight() {
+                // apply matchHeight to each category button //
+                $('.searchspring-items').each(function () {
+                    $(this).find('.product-block').matchHeight({
+                        property: 'height'
+                    });
+                });
+
+                $('.searchspring-items').each(function () {
+                    $(this).find('.product-block').find('.short-description').matchHeight({
+                        property: 'height'
+                    });
+                });
+            }
+        </script>*@
+}
+
+
+
+<div class="jumbotron">
+    <img src="~/Content/banner.jpg" />
+</div>
+
+<div class="container">
+
+    @*<div class="row">
+
+            <div class="sort-by pull-right form-inline res-sort">
+                <div class="form-group">
+                    <label class="actions-label" for="ss-sort">Sort by:</label>
+                    <select id="ss-sort" class="ng-pristine ng-valid" onchange="addSortingToFilter()">
+                        <option value="0" selected="" label="Most Popular">Most Popular</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+        </div>*@
+
+    <div class="row">
+
+
+        @{
+            Html.RenderPartial("_ItemBlockPartial", Model);
+        }
+
+
+    </div>
+</div>
+
+<style>
+    .jumbotron {
+        position: relative;
+        text-align: center;
+        background-color: #f0f0f0;
+        padding: 50px 0;
+    }
+
+        .jumbotron img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+    .panel-heading, p, .btnclas {
+        display: flex;
+        justify-content: center;
+    }
+
+    .btn {
+        width: 120px
+    }
+
+    /*    .panel-title {
+        display: flex;
+        justify-content: center;
+    }*/
+
+
+</style>

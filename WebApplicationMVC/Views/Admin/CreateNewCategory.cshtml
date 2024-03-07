@@ -1,0 +1,137 @@
+﻿@model WebApplicationMVC.Models.UserModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Alerts
+{
+    @{
+        Html.RenderPartial("MsgsPartial");
+    }
+}
+
+@{
+    Html.RenderPartial("_AdminSideNavPartial");
+
+}
+
+@section Script
+{
+
+    <script>
+        const { trim } = require("jquery");
+
+        function validation() {
+            var name = $("#Name").val();
+            var description = $("#Discription").val();
+
+
+            if (name == '' || description == '') {
+                toastr.error('Cannot Save Because Fields Are Empty', 'Error', opts);
+            }
+            else {
+                $('#submit-btn').attr('type', 'submit');
+            }
+
+        }
+
+    </script>
+
+
+}
+
+
+@{
+    if (Model.UserLevel == 1)
+    {
+        <div>
+            @using (Html.BeginForm("SaveCategory", "Admin", FormMethod.Post))
+            {
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3">
+                            <h2>Create New Category</h2>
+                            <form action="#">
+                                <div class="form-group">
+                                    <!--<label for="name">Name</label>-->
+                                    <input type="hidden" class="form-control" name="ID" id="ID" value="@( Model.categoryItem?.ID > 0 ? Model.categoryItem.ID.ToString() : "0" )">
+
+                                    <input type="text" class="form-control" name="Name" id="Name" placeholder="Name" value="@(Model.categoryItem.Name)" required/>
+                                </div>
+                                <div class="form-group">
+                                    <!--<label for="name">Name</label>-->
+                                    <input type="text" class="form-control" name="Discription" id="Discription" placeholder="Discription" value="@(Model.categoryItem.Discription)" required />
+                                </div>
+
+                                <input type="button" class="btn btn-primary" value="Create New Category" id="submit-btn" onclick="validation()" />
+
+                            </form>
+                            <br />
+                            <br />
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+
+        <div class="container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Cagegory Name</th>
+                        <th>Discription</th>
+                        <th style="width: 100px"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.category != null)
+                    {
+                        foreach (var c in Model.category)
+
+                        {
+
+                            <tr class="gradeA">
+                                <td>@c.ID</td>
+                                <td>@c.Name</td>
+
+                                <td>@c.Discription</td>
+                                <td>
+                                    <a href="~/admin/CreateNewCategory/@c.ID" title="View Order Details" class="btn btn-green">
+                                        <i class="fa-solid fa-pen"></i>
+
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+}
+
+<style>
+    .btn.btn-green {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+        .btn.btn-green:hover {
+            background-color: darkgreen;
+        }
+
+        .btn.btn-green i {
+            margin-right: 5px;
+        }
+</style>
+
+
+
+

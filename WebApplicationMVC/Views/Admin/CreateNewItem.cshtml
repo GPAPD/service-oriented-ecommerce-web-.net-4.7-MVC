@@ -1,0 +1,228 @@
+﻿@model WebApplicationMVC.Models.UserModel
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Alerts
+{
+    @{
+        Html.RenderPartial("MsgsPartial");
+
+
+    }
+}
+
+@{
+    Html.RenderPartial("_AdminSideNavPartial");
+
+}
+
+@section Script
+{
+
+    <script>
+        function validation() {
+            var pass = $('#password').val();
+            var cpass = $('#confirm-password').val();
+
+            if ((pass != cpass) && (pass != null) && (cpass != null)) {
+                toastr.error('Password And Confirem Passwords Are Not Matching', 'Error', opts);
+            }
+            else {
+                $('#submit-btn').attr('type', 'submit');
+            }
+
+        }
+
+    </script>
+
+
+}
+
+
+@{
+
+<div class="container">
+    @using (Html.BeginForm("SaveProduct", "Admin", FormMethod.Post))
+    {
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3">
+                <h2>Create New Item</h2>
+
+                <div class="row image-cls">
+                    <div class="col-sm-6 panel-body">
+                        @{
+                            if (Model.item.ID != null && Model.item.ID > 0)
+                            {
+                                <a><img src="@Model.item.ImgUrl" style="width: 80%" class="img-responsive"></a>
+                            }
+                            else
+                            {
+                                <a><img src="https://digitalfinger.id/wp-content/uploads/2019/12/no-image-available-icon-6-300x188.png.webp" style="width: 80%" class="img-responsive"></a>
+                            }
+
+                         }
+                        
+                    </div>
+                </div>
+
+                <form action="#">
+                    <div class="form-group">
+                        <!--<label for="name">Name</label>-->
+                        <input type="hidden" class="form-control" value="@Model.item.ID" name="ID" id="name" placeholder="Name">
+
+                        <input type="text" class="form-control" value="@Model.item.Name" name="Name" id="name" placeholder="Name" required>
+                    </div>
+                    <div class="form-group">
+                        <!--<label for="name">Name</label>-->
+                        <input type="text" class="form-control" value="@Model.item.Discription" name="Discription" id="Discription" placeholder="Description" required>
+                    </div>
+
+                    
+
+                    <div class="form-group">
+                        <!--<label for="email">Email</label>-->
+                        @{ if (Model.item.ID != null && Model.item.ID > 0)
+                            {
+                                <p>Stock level:       @Model.item.StockLevel</p>
+
+                                <input type="hidden" class="form-control" value="@Model.item.StockLevel" name="StockLevel" id="stock_level" placeholder="Stock Level">
+                            }
+                            else
+                            {
+                                <input type="text" class="form-control" value="@Model.item.StockLevel" name="StockLevel" id="stock_level" placeholder="Stock Level" required>
+                            }
+
+                        }
+
+                    </div>
+
+                    <label for="email">Category</label>
+
+                    <div class="form-group">
+                        <select name="CtID" id="CtID" value="@Model.item.CtID" class="form-control" >
+
+                            <option selected="selected" value="@Model.item.CtID"> @Model.item.catName</option>
+
+                            @{ foreach (var c in Model.category)
+                                {
+                                    <option value=@c.ID>@c.Name</option>
+                                }
+                            }
+
+                        </select>
+                    </div>
+
+                    <input type="hidden" name="SupID" value="@Model.ID" />
+
+                    <div class="form-group">
+                        <!--<label for="password">Password</label>-->
+                        <input type="text" class="form-control" value="@Model.item.Price" name="Price" id="Price" placeholder="Price" required>
+                    </div>
+
+                    <div class="form-group">
+                        <!--<label for="confirm-password">Confirm Password</label>-->
+                        <input type="text" class="form-control" name="Size" value="@Model.item.Size" id="Size" placeholder="Size" required>
+                    </div>
+
+                    <div class="form-group">
+                        <!--<label for="confirm-password">Confirm Password</label>-->
+                        <input type="text" class="form-control" name="ImgUrl" value="@Model.item.ImgUrl" id="ImgUrl" placeholder="ImgUrl" required>
+                    </div>
+
+                    <input type="submit" class="btn btn-primary" value="@(Model.item.ID != null? "Update Item" : "Create New Item")" id="submit-btn">
+
+                    <br />
+                    <br />
+                </form>
+            </div>
+        </div>
+    }
+
+</div>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th style="width: 100px">Item Id</th>
+                <th  style="width: 100px" ></th>
+                <th >Item Name</th>
+                <th style="width: 300px">Description</th>
+                <th style="width: 100px">Stock Level</th>
+                <th style="width: 100px">Category</th>
+                <th style="width: 100px">Supplier Id</th>
+                @*<th style="width: 100px">Is Live</th>*@
+                <th style="width: 150px">Price</th>
+                <th style="width: 100px"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.itemList != null)
+            {
+                foreach (var c in Model.itemList)
+                {
+                    <tr class="gradeA">
+                        <td>@c.ID</td>
+                        <td>
+                                <a><img src="@c.ImgUrl" style="width: 80%"></a>
+    
+                        </td>
+                        <td style="width: 100px">@c.Name</td>
+                        <td style="width: 300px">@c.Discription</td>
+
+                        <td>@c.StockLevel</td>
+                        <td>@c.CtID</td>
+                        <td>@c.SupID</td>
+                        @*<td>@(c.IsLive == 0 ? "Not Live" : "Live")</td>*@
+                        <td>LKR @c.Price</td>
+                        <td>
+                            <a href="~/admin/CreateNewItem/@c.ID" title="View Order Details" class="btn btn-success">
+                                <i class="glyphicon glyphicon-pencil"></i>
+
+                                
+
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+}
+
+<style>
+    .btn.btn-green {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-decoration: none;
+    }
+
+    .btn.btn-green:hover {
+        background-color: darkgreen;
+    }
+
+    .btn.btn-green i {
+        margin-right: 5px;
+    }
+    .image-cls{
+        display:flex;
+    }
+    .panel-body {
+        justify-content:center;
+    }
+
+    .image-cls {
+        padding:20px;
+    }
+</style>
+
+
+
+

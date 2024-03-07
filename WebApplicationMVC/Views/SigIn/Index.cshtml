@@ -1,0 +1,61 @@
+﻿@model WebApplicationMVC.Models.UserModel
+
+@{
+    ViewBag.Title = "Login Page";
+}
+
+
+@section Alerts
+{
+    @{
+        Html.RenderPartial("MsgsPartial");
+    }
+}
+
+
+
+
+@section Script
+{
+
+
+
+}
+
+<section style="height: 100vh; padding-top:2.5%">
+    <div class="container py-5">
+        <div class="row-fluid d-flex align-items-center justify-content-center">
+            <div class="col-xs-12 col-sm-8 col-md-7 col-lg-6 col-xl-5 col-xl-offset-1">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+                     class="img-responsive" alt="Phone image">
+            </div>
+            <div class="col-xs-12 col-sm-8 col-md-7 col-lg-5 col-xl-5">
+                @using (Html.BeginForm("LogIn", "Sigin", FormMethod.Post))
+                {
+                    <form action="" method="post" role="form">
+                        <!-- Email input -->
+                        <div class="form-group">
+                            <input type="email" id="user_email" name="UserName" class="form-control input-lg" placeholder="Enter Your Email" />
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-group">
+                            <input type="password" id="user_password" name="Password" class="form-control input-lg" placeholder="Enter Your Password" />
+                        </div>
+
+                        <!-- Submit button -->
+                        @*<button type="submit" id="form_submit" class="btn btn-primary btn-lg btn-block">Sign In</button>*@
+                        <input type="submit" class="btn btn-primary btn-lg btn-block" value="Submit" />
+                    </form>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+
+<!--end log form -->

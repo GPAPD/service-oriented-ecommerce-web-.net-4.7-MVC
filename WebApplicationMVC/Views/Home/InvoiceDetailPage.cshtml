@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = "ShippingDetailsPage";
+}
+
+@model WebApplicationMVC.Models.UserModel
+
+@section Alerts
+{
+    @{
+        Html.RenderPartial("MsgsPartial");
+    }
+}
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="page-header">
+                    <h2>Invoice</h2>
+                    <h3 class="pull-right">Order #@Model.invoice.OrderID  @((bool)Model.Preorder? "(PreOrdered Item)" : " ") <span id=""></span></h3>
+                </div>
+                <hr />
+                <div class="row">
+                    <div class="col-xs-6">
+                        <address>
+                            <strong>Billed To: @Model.invoice.OrderID</strong><br />
+                            <span id="CNameLabel">@Model.invoice.CsName</span><br />
+                            <span id="CAddressLabel">@Model.invoice.CsLast</span><br />
+                            <span id="CityLabel"></span>, <span id="ZIPCodeLabel"></span>
+                        </address>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <address>
+                            <strong>Shipping To:</strong><br />
+                            <span id="Label1">@Model.invoice.AddressLine1</span><br />
+                            <span id="Label2">@Model.invoice.AddressLine2</span><br />
+                            <span id="Label3">@Model.invoice.City</span>, <span id="Label4"></span>
+                        </address>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6">
+                        <address>
+                            <strong>Payment Method:</strong><br />
+                            Online Payment <br />
+                            <span id="EmailLabel"> @Model.invoice.Email</span>
+                        </address>
+                    </div>
+                    <div class="col-xs-6 text-right">
+                        <address>
+                            <strong>Order Date: </strong><br />
+                            <span id="OrderDateLabel"></span><br /><br />
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- The order summary table using Bootstrap table -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title"><strong>Order summary</strong></h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="table-responsive">
+                            <table class="table table-condensed">
+                                <thead>
+                                    <tr>
+                                        <th>Item</th>
+                                        <th class="text-center">Price</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-right">Totals</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><span id="ProductIdl">@Model.item.Name</span></td>
+                                        <td class="text-center">Rs. @Model.item.Price <span id="PriceLabel1"></span></td>
+                                        <td class="text-center"> @Model.invoice.ItemCount.ToString()<span id="QuantityLabel1"></span></td>
+                                        <td class="text-right">Rs. @Model.TotalPrice.00 <span id="TotalLabel11"></span></td>
+                                    </tr>
+
+                                    <!-- Add more rows as needed for other items -->
+                                    @*<tr>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line"></td>
+                                        <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                        <td class="thick-line text-right">Rs. <span id="SubtotalLabel"></span></td>
+                                    </tr>*@
+                                    <tr>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-center"><strong>Shipping</strong></td>
+                                        <td class="no-line text-right">(FREE) Rs. 00.00 <span id="ShippingLabel"></span></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="no-line"></td>
+                                        <td class="no-line"></td>
+                                        <td class="no-line text-center"><strong>Total</strong></td>
+                                        <td class="no-line text-right">Rs. @Model.TotalPrice.00 <span id="TotalAmountLabel"></span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p>Please Take A Screenshot Of Your Invoice</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
